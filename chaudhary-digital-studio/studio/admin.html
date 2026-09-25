@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<title>Admin | Chaudhary Digital Studio</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="configWarning" class="config-warning wrap" style="display:none; margin-top:24px;">
+  Firebase has not been configured yet, so the admin panel won't work.
+  Open <code>js/firebase-config.js</code> and add your Firebase project keys — full instructions are in README.md.
+</div>
+
+<!-- LOGIN VIEW -->
+<div class="admin-shell" id="loginView">
+  <div class="admin-login">
+    <h1>Admin Login</h1>
+    <p style="margin-bottom:16px;">Studio staff only.</p>
+    <form id="loginForm" class="card-form">
+      <div class="field">
+        <label for="loginEmail">Email</label>
+        <input id="loginEmail" type="email" required autocomplete="username">
+      </div>
+      <div class="field">
+        <label for="loginPass">Password</label>
+        <input id="loginPass" type="password" required minlength="6" autocomplete="current-password">
+      </div>
+      <button class="btn btn-primary" type="submit" id="loginBtn">Log in</button>
+      <div id="loginNote" class="form-note"></div>
+    </form>
+  </div>
+</div>
+
+<!-- ADMIN PANEL VIEW -->
+<div id="panelView" style="display:none;">
+  <div class="admin-topbar">
+    <a href="index.html" class="brand" style="font-size:1rem;">Chaudhary <span>Digital Studio</span></a>
+    <div style="display:flex; align-items:center; gap:16px;">
+      <span id="adminEmail" style="color:var(--muted); font-size:0.85rem;"></span>
+      <button class="btn btn-ghost btn-sm" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+
+  <div class="admin-body">
+    <nav class="admin-nav">
+      <button data-view="categories" class="active">Categories</button>
+      <button data-view="upload">Upload Photos</button>
+      <button data-view="showcase">Homepage Showcase</button>
+      <button data-view="queries">Contact Queries</button>
+    </nav>
+
+    <div class="admin-panel">
+
+      <!-- Categories -->
+      <section class="panel-view active" id="view-categories">
+        <h2>Categories</h2>
+        <p class="panel-sub">Create one category per event or customer, e.g. "Rahul Wedding 2026".</p>
+
+        <div class="card">
+          <div class="row">
+            <div class="field">
+              <label for="newCatName">New category name</label>
+              <input id="newCatName" placeholder="e.g. Rahul Wedding 2026" maxlength="80">
+            </div>
+            <button class="btn btn-primary" id="addCatBtn">Create category</button>
+          </div>
+        </div>
+
+        <ul class="cat-list" id="catList"></ul>
+        <div id="catEmptyAdmin" class="empty-state" style="display:none;">
+          <strong>No categories yet</strong>
+          Create your first category above.
+        </div>
+      </section>
+
+      <!-- Upload -->
+      <section class="panel-view" id="view-upload">
+        <h2>Upload Photos</h2>
+        <p class="panel-sub">Choose a category, then upload photos to it.</p>
+
+        <div class="card">
+          <div class="field">
+            <label for="uploadCatSelect">Category</label>
+            <select id="uploadCatSelect"></select>
+          </div>
+          <label class="upload-drop" for="fileInput" style="display:block; margin-top:12px;">
+            📷 Tap to choose photos (you can select multiple at once)
+            <input type="file" id="fileInput" accept="image/*" multiple style="display:none;">
+          </label>
+          <div id="uploadProgress" style="margin-top:10px; color:var(--muted); font-size:0.85rem;"></div>
+        </div>
+
+        <div id="uploadCatPhotosLabel" class="panel-sub"></div>
+        <div class="photo-grid" id="uploadPhotoGrid"></div>
+      </section>
+
+      <!-- Showcase -->
+      <section class="panel-view" id="view-showcase">
+        <h2>Homepage Showcase</h2>
+        <p class="panel-sub">Choose which photos appear in the gallery on the public homepage.</p>
+        <div class="field" style="max-width:320px;">
+          <label for="showcaseCatSelect">Browse photos by category</label>
+          <select id="showcaseCatSelect"></select>
+        </div>
+        <div class="photo-grid" id="showcasePhotoGrid"></div>
+      </section>
+
+      <!-- Queries -->
+      <section class="panel-view" id="view-queries">
+        <h2>Contact Queries</h2>
+        <p class="panel-sub">Messages submitted through the website's contact form.</p>
+        <div id="queriesList"></div>
+        <div id="queriesEmpty" class="empty-state" style="display:none;">
+          <strong>No queries yet</strong>
+          New enquiries from customers will appear here.
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- QR modal -->
+<div id="qrModal">
+  <div class="qr-card">
+    <h3 id="qrCatName" style="font-size:1.1rem;"></h3>
+    <canvas id="qrCanvas"></canvas>
+    <p style="font-size:0.85rem;">Share this QR code with the customer — scanning it shows only this category's photos, with no login required.</p>
+    <div style="display:flex; gap:8px; justify-content:center;">
+      <button class="btn btn-primary btn-sm" id="qrDownload">Download PNG</button>
+      <button class="btn btn-ghost btn-sm" id="qrClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-storage-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

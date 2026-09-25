@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<title>Chaudhary Digital Studio | Wedding & Event Photography, Sikar</title>
+<meta name="description" content="Chaudhary Digital Studio, Sikar — wedding, engagement and event photography. Every moment, framed with care.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Chaudhary <span>Digital Studio</span></a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap" style="display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:center; width:100%;">
+    <div>
+      <div class="hero-eyebrow">Sikar, Rajasthan</div>
+      <h1>Every moment, held in a single frame.</h1>
+      <p class="lede">Wedding, engagement and event photography — honest emotion, clean composition, and photographs that still feel beautiful years from now.</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn btn-primary">Enquire about a booking</a>
+        <a href="#gallery" class="btn btn-ghost">View our work</a>
+      </div>
+    </div>
+    <div class="hero-frame">
+      <span class="corner-mark cm-tl"></span>
+      <span class="corner-mark cm-br"></span>
+    </div>
+  </div>
+</section>
+
+<div class="filmstrip"></div>
+
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <p>A few favourites, curated from the admin panel.</p>
+    </div>
+    <div id="galleryGrid" class="gallery"></div>
+    <div id="galleryEmpty" class="empty-state" style="display:none;">
+      <strong>Gallery coming soon</strong>
+      Photographs will appear here as soon as they're added.
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about" style="background:var(--bg-alt); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="section-head">
+          <h2>About the studio</h2>
+          <p>Chaudhary Digital Studio is based in Sikar, Rajasthan, covering weddings, engagements, birthdays and corporate events — candid and traditional coverage, shaped around how you actually want to be remembered.</p>
+        </div>
+      </div>
+      <div>
+        <ul class="service-list">
+          <li>Wedding Photography <span>Full-day coverage</span></li>
+          <li>Engagement Shoot <span>Studio or outdoor</span></li>
+          <li>Candid Photography <span>Natural, unposed moments</span></li>
+          <li>Event Videography <span>Highlights + full film</span></li>
+          <li>Photo Album Design <span>Premium prints</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-details">
+        <div class="section-head">
+          <h2>Get in touch</h2>
+          <p>For bookings, pricing or any query, send us a message below — we'll call you back shortly.</p>
+        </div>
+        <p>📞 <a href="tel:+910000000000">+91 00000 00000</a></p>
+        <p>✉️ <a href="mailto:info@chaudharydigitalstudio.com">info@chaudharydigitalstudio.com</a></p>
+        <p>📍 Sikar, Rajasthan</p>
+      </div>
+      <form class="card-form" id="contactForm">
+        <div class="field">
+          <label for="cf-name">Name</label>
+          <input id="cf-name" name="name" required maxlength="80">
+        </div>
+        <div class="field">
+          <label for="cf-phone">Phone number</label>
+          <input id="cf-phone" name="phone" required maxlength="15" pattern="[0-9+ ]{7,15}" inputmode="tel">
+        </div>
+        <div class="field">
+          <label for="cf-message">Your message</label>
+          <textarea id="cf-message" name="message" rows="4" required maxlength="500"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" id="cf-submit">Send message</button>
+        <div id="cf-note"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Chaudhary Digital Studio, Sikar</span>
+    <span>All photographs copyright Chaudhary Digital Studio</span>
+  </div>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-storage-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

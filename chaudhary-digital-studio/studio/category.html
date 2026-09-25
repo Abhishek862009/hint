@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<title>Your Photos | Chaudhary Digital Studio</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Chaudhary <span>Digital Studio</span></a>
+  </div>
+</header>
+
+<section class="cat-header">
+  <div class="wrap">
+    <div class="hero-eyebrow">Your photos</div>
+    <h1 id="catName">Loading...</h1>
+    <div class="cat-count" id="catCount"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div id="spinner" class="spinner"></div>
+    <div id="photoGrid" class="gallery"></div>
+    <div id="catEmpty" class="empty-state" style="display:none;">
+      <strong id="emptyTitle">We couldn't find this gallery</strong>
+      <span id="emptyBody">Please check the link, or contact the studio directly.</span>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose" aria-label="Close">✕</button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Chaudhary Digital Studio, Sikar</span>
+  </div>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/category.js"></script>
+</body>
+</html>
